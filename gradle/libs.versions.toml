@@ -14,7 +14,6 @@ shadow = "8.3.6"
 [libraries]
 spigot = { module = "org.spigotmc:spigot", version.ref = "spigot" }
 placeholderapi = { module = "me.clip:placeholderapi", version.ref = "placeholderapi" }
-xseries = { module = "com.github.cryptomorin:XSeries", version.ref = "xseries" }
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
 # Test

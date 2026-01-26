@@ -28,10 +28,9 @@ Building DecentHolograms is very simple. All you need is JDK 8+, Gradle, Git and
 ```xml
 <dependencies>
     <dependency>
-        <groupId>com.github.decentsoftware-eu</groupId>
+        <groupId>com.github.Guarmanda</groupId>
         <artifactId>decentholograms</artifactId>
-        <version>VERSION</version>
-        <scope>provided</scope>
+        <version>2.9.8</version>
     </dependency>
 </dependencies>
 ```

@@ -4,10 +4,10 @@ import eu.decentsoftware.holograms.api.holograms.Hologram;
 import eu.decentsoftware.holograms.api.holograms.HologramManager;
 import eu.decentsoftware.holograms.api.listeners.PlayerListener;
 import eu.decentsoftware.holograms.api.listeners.WorldListener;
-import eu.decentsoftware.holograms.api.utils.BungeeUtils;
 import eu.decentsoftware.holograms.api.utils.Log;
 import eu.decentsoftware.holograms.api.utils.reflect.Version;
 import eu.decentsoftware.holograms.api.utils.tick.Ticker;
+import eu.decentsoftware.holograms.integration.IntegrationAvailabilityService;
 import eu.decentsoftware.holograms.nms.NmsAdapterFactory;
 import eu.decentsoftware.holograms.nms.NmsPacketListenerService;
 import eu.decentsoftware.holograms.nms.api.NmsAdapter;
@@ -30,6 +30,7 @@ public final class DecentHolograms {
 
     private final JavaPlugin plugin;
     private NmsAdapter nmsAdapter;
+    private IntegrationAvailabilityService integrationAvailabilityService;
     private NmsPacketListenerService nmsPacketListenerService;
     private HologramManager hologramManager;
 
@@ -44,17 +45,17 @@ public final class DecentHolograms {
         initializeNmsAdapter();
         Settings.reload();
 
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        this.integrationAvailabilityService = new IntegrationAvailabilityService(plugin, pluginManager);
+        this.integrationAvailabilityService.initialize();
         this.ticker = new Ticker();
         this.hologramManager = new HologramManager();
 
 
         this.nmsPacketListenerService = new NmsPacketListenerService(plugin, nmsAdapter);
 
-        PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new PlayerListener(this), this.plugin);
-        pm.registerEvents(new WorldListener(hologramManager), this.plugin);
-
-        BungeeUtils.init();
+        pluginManager.registerEvents(new PlayerListener(this), this.plugin);
+        pluginManager.registerEvents(new WorldListener(hologramManager), this.plugin);
     }
 
     void disable() {
@@ -67,7 +68,7 @@ public final class DecentHolograms {
             hologram.destroy();
         }
 
-        BungeeUtils.destroy();
+        this.integrationAvailabilityService.shutdown();
     }
 
     private void initializeNmsAdapter() {

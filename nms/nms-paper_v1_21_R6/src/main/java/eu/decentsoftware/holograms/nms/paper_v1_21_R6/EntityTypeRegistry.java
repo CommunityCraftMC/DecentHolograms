@@ -1,8 +1,8 @@
 package eu.decentsoftware.holograms.nms.paper_v1_21_R6;
 
 import eu.decentsoftware.holograms.nms.api.DecentHologramsNmsException;
-import org.bukkit.NamespacedKey;
 import net.minecraft.world.entity.EntityType;
+import org.bukkit.NamespacedKey;
 
 import java.util.Optional;
 
@@ -28,7 +28,6 @@ final class EntityTypeRegistry {
 
     private static NamespacedKey getNamespacedKey(org.bukkit.entity.EntityType entityType) {
         try {
-            // Using the deprecated #getKey method because #getKeyOrThrow and #getKeyOrNull don't exist on Paper.
             return entityType.getKey();
         } catch (IllegalStateException e) {
             throw new DecentHologramsNmsException("Couldn't get key for entity type: " + entityType);
