@@ -9,8 +9,6 @@ import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.MockedStatic;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,16 +41,24 @@ class NmsAdapterFactoryTest {
         assertEquals("version cannot be null", exception.getMessage());
     }
 
-    @ParameterizedTest
-    @EnumSource(Version.class)
-    void testCreateNmsAdapter_valid(Version version) {
-        String className = "eu.decentsoftware.holograms.nms." + version.name() + ".NmsAdapterImpl";
+    @Test
+    @SuppressWarnings("all")
+    void testCreateNmsAdapter_valid() {
+        try (MockedStatic<Bukkit> bMock = mockStatic(Bukkit.class)) {
+            Server server = mock(Server.class);
+            when(server.getBukkitVersion()).thenReturn("1.8.8-R0.1-SNAPSHOT");
+            bMock.when(Bukkit::getServer).thenReturn(server);
 
-        try (MockedStatic<ReflectUtil> classMock = mockStatic(ReflectUtil.class)) {
-            classMock.when(() -> ReflectUtil.getClass(className)).thenReturn(ValidNmsAdapter.class);
-            NmsAdapter adapter = factory.createNmsAdapter(version);
-            assertNotNull(adapter);
-            assertInstanceOf(ValidNmsAdapter.class, adapter);
+            for (Version version : Version.values()) {
+                String className = "eu.decentsoftware.holograms.nms." + version.name() + ".NmsAdapterImpl";
+
+                try (MockedStatic<ReflectUtil> classMock = mockStatic(ReflectUtil.class)) {
+                    classMock.when(() -> ReflectUtil.getClass(className)).thenReturn(ValidNmsAdapter.class);
+                    NmsAdapter adapter = factory.createNmsAdapter(version);
+                    assertNotNull(adapter);
+                    assertInstanceOf(ValidNmsAdapter.class, adapter);
+                }
+            }
         }
     }
 
