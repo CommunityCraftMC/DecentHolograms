@@ -273,9 +273,8 @@ public class HologramLine extends HologramObject {
     /**
      * Update the location of this line for given players.
      *
-     * @param players Given players.
      */
-    public void updateLocation(boolean updateRotation, Player... players) {
+    public void updateLocation(Player ... players) {
         synchronized (renderMutex) {
             if (isDisabled()) {
                 return;
