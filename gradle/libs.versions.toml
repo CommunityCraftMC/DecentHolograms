@@ -1,12 +1,11 @@
 [versions]
 spigot = "1.13-R0.1-SNAPSHOT"
-placeholderapi = "2.11.6"
-xseries = "13.5.1"
-lombok = "1.18.38"
-annotations = "26.0.2"
+placeholderapi = "2.12.2"
+lombok = "1.18.44"
+annotations = "26.1.0"
 # Test
-junit = "5.13.1"
-junit-platform-launcher = "1.13.1"
+junit = "5.14.3"
+junit-platform-launcher = "1.14.3"
 mockito = "4.11.0" # Has to be 4.x for Java 8 compatibility
 # Plugins
 shadow = "9.4.0"
