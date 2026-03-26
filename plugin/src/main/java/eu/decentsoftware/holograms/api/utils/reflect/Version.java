@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 @Getter
 @SuppressWarnings("java:S115") // SonarLint: Enum values naming convention
 public enum Version {
-    v1_8_R1(8, Platform.ALL,"1.8"),
+    v1_8_R1(8, Platform.ALL, "1.8"),
     v1_8_R2(8, Platform.ALL, "1.8.3"),
     v1_8_R3(8, Platform.ALL, "1.8.4", "1.8.5", "1.8.6", "1.8.7", "1.8.8"),
     v1_9_R1(9, Platform.ALL, "1.9", "1.9.2"),
@@ -46,7 +46,8 @@ public enum Version {
     v1_21_R6(21, Platform.SPIGOT, "1.21.9", "1.21.10"),
     paper_v1_21_R6(21, Platform.PAPER, "1.21.9", "1.21.10"),
     v1_21_R7(21, Platform.SPIGOT, "1.21.11"),
-    paper_v1_21_R7(21, Platform.PAPER, "1.21.11")
+    paper_v1_21_R7(21, Platform.PAPER, "1.21.11"),
+    v26_1(26, Platform.SPIGOT, "26.1"),
     ;
 
     /*
@@ -81,7 +82,7 @@ public enum Version {
     @Nullable
     public static Version fromMinecraftVersion(String minecraftVersion, Platform currentPlatform) {
         for (Version version : Version.values()) {
-            if(version.platform.equals(Platform.ALL) || version.platform.equals(currentPlatform)) {
+            if (version.platform.equals(Platform.ALL) || version.platform.equals(currentPlatform)) {
                 for (String candidateMinecraftVersion : version.getMinecraftVersions()) {
                     if (candidateMinecraftVersion.equals(minecraftVersion)) {
                         return version;
