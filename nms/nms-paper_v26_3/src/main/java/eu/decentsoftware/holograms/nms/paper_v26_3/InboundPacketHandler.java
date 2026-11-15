@@ -14,4 +14,3 @@ class InboundPacketHandler extends ChannelInboundHandlerAdapter {
         super.channelRead(ctx, packet);
     }
 }
-

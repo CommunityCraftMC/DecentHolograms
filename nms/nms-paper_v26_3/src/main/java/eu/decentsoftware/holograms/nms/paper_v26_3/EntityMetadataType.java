@@ -46,4 +46,3 @@ class EntityMetadataType<T> {
         return new SynchedEntityData.DataItem<>(dataWatcherObject, value);
     }
 }
-

@@ -18,4 +18,3 @@ class HologramRendererFactory implements NmsHologramRendererFactory {
 
 
 }
-

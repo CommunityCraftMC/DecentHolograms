@@ -66,4 +66,3 @@ class TextHologramRenderer implements NmsTextHologramRenderer {
         return position.subtractY(0.5);
     }
 }
-

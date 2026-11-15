@@ -39,4 +39,3 @@ class PacketDataSerializerWrapper {
         return instance;
     }
 }
-

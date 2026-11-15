@@ -98,4 +98,3 @@ public class NmsAdapterImpl implements NmsAdapter {
         throw new DecentHologramsNmsException("Failed to modify player's pipeline. player: " + player.getName(), e);
     }
 }
-
